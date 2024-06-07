@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Root route to display text at '/'
 app.get("/", (req, res) => {
-    res.send("Welcome to the Google Generative AI Chat API!");
+    res.json("Welcome to the Google Generative AI Chat API!");
 });
 
 app.post("/gemini", async (req, res) => {
