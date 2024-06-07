@@ -47,6 +47,10 @@ p {
     color: white;
 }
 
+.surprise:hover {
+    background: #4da0ff;
+}
+
 .input-container {
     width: 100%;
     display: flex;
@@ -89,6 +93,11 @@ p {
     background-color: #cacaca;
 }
 
+.input-container button:hover {
+    background-color: #efb147;
+}
+
+
 .answer {
     padding: 1rem 1.2rem;
     border: solid 0.1rem #cacaca;
@@ -100,5 +109,11 @@ p {
 }
 
 .user p{
-    background-color: black;
+    background-color: #4da0ff;
+    color: black;
+}
+
+.model p{
+    background-color: #4dff7a;
+    color: black;
 }
