@@ -20,7 +20,7 @@ p {
 
 .app {
     width: 80vw;
-    margin: 10vw;
+    margin: 5vw;
     height: 80vh;
     display: flex;
     flex-direction: column;
@@ -72,21 +72,23 @@ p {
 }
 
 .input-container button {
-    min-width: 10%;
+    min-width: 20%;
     border: none;
     border-left: 0.1rem solid #cacaca;
     background-color: #fff;
-    color: #777;
-    font-weight: bold;
+    color: black;
+    font-weight: 800;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-.input-container button:active{
+.input-container button:active {
     background-color: #cacaca;
 }
 
-.answer{
+.answer {
     padding: 1rem 1.2rem;
     border: solid 0.1rem #cacaca;
     background-color: #fff;

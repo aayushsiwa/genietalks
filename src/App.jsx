@@ -19,7 +19,7 @@ const App = () => {
 
     const getResponse = async () => {
         if (!value) {
-            setError("Error: Please ask a question");
+            setError("Please ask a question");
             return;
         }
         try {
@@ -64,7 +64,7 @@ const App = () => {
             ]);
             setValue("");
         } catch (error) {
-            console.error("Error:", error);
+            console.error(error);
             setError("Something went wrong");
         }
     };
@@ -94,8 +94,38 @@ const App = () => {
                     placeholder="When is Christmas...?"
                     onChange={(e) => setValue(e.target.value)}
                 />
-                {!error && <button onClick={getResponse}>Ask Me</button>}
-                {error && <button onClick={clear}>Clear</button>}
+                {!error && (
+                    <button onClick={getResponse} className="send">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-send"
+                            viewBox="0 0 16 16"
+                        >
+                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                        </svg>
+                    </button>
+                )}
+                {error && (
+                    <button onClick={clear}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-arrow-repeat"
+                            viewBox="0 0 16 16"
+                        >
+                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                            <path
+                                fillRule="evenodd"
+                                d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"
+                            />
+                        </svg>
+                    </button>
+                )}
             </div>
             {error && <p>{error}</p>}
             <div className="search-result">
