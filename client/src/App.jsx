@@ -1,6 +1,8 @@
 import { useState } from "react";
+require("dotenv").config();
 
 const App = () => {
+    const API_URL = process.env.API_URL;
     const [value, setValue] = useState("");
     const [error, setError] = useState("");
     const [chatHistory, setChatHistory] = useState([]);
@@ -33,10 +35,7 @@ const App = () => {
                     "Content-Type": "application/json",
                 },
             };
-            const response = await fetch(
-                "http://localhost:8000/gemini",
-                options
-            );
+            const response = await fetch(API_URL, options);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
