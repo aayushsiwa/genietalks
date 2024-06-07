@@ -13,8 +13,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/", (req, res) => {
-    res.send("Server is running");
+// Root route to display text at '/'
+app.get("/", (req, res) => {
+    res.send("Welcome to the Google Generative AI Chat API!");
 });
 
 app.post("/gemini", async (req, res) => {

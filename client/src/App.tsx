@@ -1,11 +1,15 @@
-import { useState } from "react";
-require("dotenv").config();
+import React, { useState, ChangeEvent } from "react";
 
-const App = () => {
-    const API_URL = process.env.API_URL;
-    const [value, setValue] = useState("");
-    const [error, setError] = useState("");
-    const [chatHistory, setChatHistory] = useState([]);
+interface ChatItem {
+    role: string;
+    parts: string;
+}
+
+const App: React.FC = () => {
+    const API_URL = import.meta.env.VITE_API_URL as string;
+    const [value, setValue] = useState<string>("");
+    const [error, setError] = useState<string>("");
+    const [chatHistory, setChatHistory] = useState<ChatItem[]>([]);
 
     const surpriseOptions = [
         "Who won the latest Nobel Peace Prize?",
@@ -25,6 +29,7 @@ const App = () => {
             return;
         }
         try {
+            console.log("API_URL:", API_URL); // Log the API URL for debugging
             const options = {
                 method: "POST",
                 body: JSON.stringify({
@@ -51,19 +56,19 @@ const App = () => {
             }
 
             setChatHistory((oldChatHistory) => [
-                ...oldChatHistory,
-                {
-                    role: "user",
-                    parts: value,
-                },
                 {
                     role: "model",
                     parts: data.parts.join(" "), // Join parts to form a complete message
                 },
+                {
+                    role: "user",
+                    parts: value,
+                },
+                ...oldChatHistory,
             ]);
             setValue("");
         } catch (error) {
-            console.error(error);
+            console.error("Error:", error);
             setError("Something went wrong");
         }
     };
@@ -91,7 +96,9 @@ const App = () => {
                     type="text"
                     value={value}
                     placeholder="When is Christmas...?"
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setValue(e.target.value)
+                    }
                 />
                 {!error && (
                     <button onClick={getResponse} className="send">
@@ -129,7 +136,10 @@ const App = () => {
             {error && <p>{error}</p>}
             <div className="search-result">
                 {chatHistory.map((chatItem, index) => (
-                    <div key={index}>
+                    <div
+                        key={index}
+                        className={chatItem.role === "user" ? "user" : "model"}
+                    >
                         <p className="answer">
                             {chatItem.role} : {chatItem.parts}
                         </p>
