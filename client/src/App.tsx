@@ -28,13 +28,15 @@ const App: React.FC = () => {
             setError("Please ask a question");
             return;
         }
+        const query=value;
+        setValue("");
         try {
             console.log("API_URL:", API_URL); // Log the API URL for debugging
             const options = {
                 method: "POST",
                 body: JSON.stringify({
                     history: chatHistory,
-                    message: value,
+                    message: query,
                 }),
                 headers: {
                     "Content-Type": "application/json",

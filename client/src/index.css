@@ -59,6 +59,7 @@ p {
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 82, 0.15) 0 0.1rem 0.2rem;
     overflow: hidden;
+    min-height: 7.5vh;
 }
 
 .input-container input {
