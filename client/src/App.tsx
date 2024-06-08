@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import { marked } from "marked";
+import clipboard from "./assets/clipboard.svg";
 
 interface ChatItem {
     role: string;
@@ -84,6 +85,48 @@ const App: React.FC = () => {
         setChatHistory([]);
     };
 
+    const copyButton = document.querySelector(
+        ".clipboard"
+    ) as HTMLButtonElement;
+
+    const copyText = () => {
+        const paragraphToCopy = copyButton?.previousElementSibling as HTMLElement;
+
+        if (
+            paragraphToCopy &&
+            paragraphToCopy.tagName === "P" &&
+            paragraphToCopy.textContent
+        ) {
+            // Check if the next element is a paragraph and has text content
+            navigator.clipboard
+                .writeText(paragraphToCopy.textContent)
+                .then(() => {
+                    console.log("Text copied to clipboard!");
+                })
+                .catch((err) => {
+                    console.error("Failed to copy text:", err);
+                });
+        } else {
+            console.error("No paragraph element found to copy.");
+        }
+    };
+
+    const code=document.getElementsByTagName("code");
+    console.log(code);
+
+    useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent) => {
+            if (event.key === "Enter" && value !== "") {
+                getResponse();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyPress);
+
+        // Clean up the event listener when the component unmounts
+        return () => document.removeEventListener("keydown", handleKeyPress);
+    });
+
     return (
         <div className="app">
             <p>
@@ -91,7 +134,7 @@ const App: React.FC = () => {
                 <button
                     className="surprise"
                     onClick={surprise}
-                    disabled={chatHistory.length > 0}
+                    // disabled={chatHistory.length > 0}
                 >
                     Surprise Me!
                 </button>
@@ -155,6 +198,16 @@ const App: React.FC = () => {
                                 __html: marked(chatItem.parts),
                             }}
                         />
+                        {chatItem.role === "model" ? (
+                            <>
+                                <button className="clipboard" onClick={copyText}>
+                                    <img src={clipboard} alt="" className="" />
+                                </button>
+                                <hr />
+                            </>
+                        ) : (
+                            ""
+                        )}
                     </div>
                 ))}
             </div>

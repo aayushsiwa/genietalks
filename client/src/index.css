@@ -114,7 +114,7 @@ p {
 .user {
     margin-top: 1rem;
     border: solid 0.1rem #cacaca;
-    border-radius: 30%;
+    border-radius: 0.5rem;
     width: fit-content;
     background-color: #4da0ff;
     color: black;
@@ -135,8 +135,21 @@ pre {
 .model {
     text-align: left;
     color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+hr {
+    width: 50%;
+    border-color: #efb147;
 }
 
 .model p {
     font-size: 1rem;
+}
+
+.clipboard {
+    border: none;
+    cursor: pointer;
+    background-color: #fafafc;
 }
