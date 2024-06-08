@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
+import { marked } from "marked";
 
 interface ChatItem {
     role: string;
@@ -10,6 +11,7 @@ const App: React.FC = () => {
     const [value, setValue] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [chatHistory, setChatHistory] = useState<ChatItem[]>([]);
+    const [latestQuery, setLatestQuery] = useState<string>("");
 
     const surpriseOptions = [
         "Who won the latest Nobel Peace Prize?",
@@ -28,7 +30,7 @@ const App: React.FC = () => {
             setError("Please ask a question");
             return;
         }
-        const query=value;
+        setLatestQuery(value);
         setValue("");
         try {
             console.log("API_URL:", API_URL); // Log the API URL for debugging
@@ -36,7 +38,7 @@ const App: React.FC = () => {
                 method: "POST",
                 body: JSON.stringify({
                     history: chatHistory,
-                    message: query,
+                    message: value,
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -59,13 +61,14 @@ const App: React.FC = () => {
 
             setChatHistory((oldChatHistory) => [
                 {
-                    role: "model",
-                    parts: data.parts.join(" "), // Join parts to form a complete message
-                },
-                {
                     role: "user",
                     parts: value,
                 },
+                {
+                    role: "model",
+                    parts: data.parts.join(" "), // Join parts to form a complete message
+                },
+
                 ...oldChatHistory,
             ]);
             setValue("");
@@ -103,7 +106,11 @@ const App: React.FC = () => {
                     }
                 />
                 {!error && (
-                    <button onClick={getResponse} className="send">
+                    <button
+                        onClick={getResponse}
+                        className="send"
+                        disabled={!value}
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -142,9 +149,12 @@ const App: React.FC = () => {
                         key={index}
                         className={chatItem.role === "user" ? "user" : "model"}
                     >
-                        <p className="answer">
-                            {chatItem.role} : {chatItem.parts}
-                        </p>
+                        <p
+                            className="answer"
+                            dangerouslySetInnerHTML={{
+                                __html: marked(chatItem.parts),
+                            }}
+                        />
                     </div>
                 ))}
             </div>

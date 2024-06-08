@@ -21,15 +21,10 @@ p {
 
 .app {
     width: 80vw;
-    margin: 5vw;
-    height: 80vh;
+    margin: 1vw;
+    height: 95vh;
     display: flex;
     flex-direction: column;
-}
-
-.search-result {
-    margin-top: 1rem;
-    overflow: scroll;
 }
 
 .surprise {
@@ -98,23 +93,50 @@ p {
     background-color: #efb147;
 }
 
-
-.answer {
-    padding: 1rem 1.2rem;
-    border: solid 0.1rem #cacaca;
-    background-color: #fff;
-    margin: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 200;
-    border-radius: 0.5rem;
+.input-container button:disabled {
+    background-color: #5b5b5b;
 }
 
-.user p{
+.search-result {
+    margin-top: 1rem;
+    overflow-y: auto;
+}
+
+.answer {
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 1rem;
+    margin: 0rem;
+    font-weight: 200;
+    overflow: auto;
+}
+
+.user {
+    margin-top: 1rem;
+    border: solid 0.1rem #cacaca;
+    border-radius: 30%;
+    width: fit-content;
     background-color: #4da0ff;
     color: black;
 }
 
-.model p{
-    background-color: #4dff7a;
+pre {
+    padding: 1rem;
+    overflow: auto;
+    background-color: black;
+    color: white;
+}
+
+.user p {
+    /* background-color: #4da0ff; */
+    font-size: 1rem;
+}
+
+.model {
+    text-align: left;
     color: black;
+}
+
+.model p {
+    font-size: 1rem;
 }
