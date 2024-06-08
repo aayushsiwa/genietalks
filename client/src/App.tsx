@@ -11,7 +11,7 @@ const App: React.FC = () => {
     const [value, setValue] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [chatHistory, setChatHistory] = useState<ChatItem[]>([]);
-    const [latestQuery, setLatestQuery] = useState<string>("");
+    // const [latestQuery, setLatestQuery] = useState<string>("");
 
     const surpriseOptions = [
         "Who won the latest Nobel Peace Prize?",
@@ -30,7 +30,7 @@ const App: React.FC = () => {
             setError("Please ask a question");
             return;
         }
-        setLatestQuery(value);
+        // setLatestQuery(value);
         setValue("");
         try {
             console.log("API_URL:", API_URL); // Log the API URL for debugging
