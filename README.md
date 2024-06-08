@@ -1,73 +1,109 @@
-# React-Google-GenerativeAI-Chat
+# GenieTalks
 
-This project is a chat application that integrates with Google's Generative AI model for intelligent responses. Users can ask questions, receive responses, and view their chat history. The project demonstrates how to use React for the frontend and Express.js for the backend, leveraging Google's Generative AI for conversational capabilities.
+GenieTalks is a chatbot application that utilizes the Gemini API to provide intelligent responses to user queries. The project consists of a client and server setup. The client is built with Vite and connects to an Express server which handles API requests to the Gemini API.
 
-## Getting Started
+## Table of Contents
 
-To get started with this project, follow the steps below:
+- [Features](#features)
+- [Live Demo](#live-demo)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- Ask questions and get intelligent responses.
+- Surprise me feature for random queries.
+- View chat history.
+- Clear chat history.
+
+## Live Demo
+
+Check out the live demo of GenieTalks [here](https://genietalks.vercel.app).
+
+## Installation
 
 ### Prerequisites
 
--   Node.js installed on your machine
--   Google Generative AI API key
+- Node.js (v14 or higher)
+- npm or yarn
 
-### Installation
+### Steps
 
 1. Clone the repository:
-
-    ```sh
-    git clone https://github.com/your-username/react-google-generativeai-chat.git
-    cd react-google-generativeai-chat
+    ```bash
+    git clone https://github.com/aayushsiwa/genietalks.git
+    cd genietalks
     ```
 
-2. Install dependencies for both the server and client:
-
-    ```sh
-    # Install server dependencies
-    cd server
-    npm install
-
-    # Install client dependencies
-    cd ../client
+2. Install dependencies for the client:
+    ```bash
+    cd client
     npm install
     ```
 
-3. Create a `.env` file in the `server` folder and add your Google Generative AI API key:
-
-    ```env
-    API_KEY=your-google-generative-ai-api-key
+3. Install dependencies for the server:
+    ```bash
+    cd ../server
+    npm install
     ```
 
-## Running the Application
+## Environment Variables
 
-### Frontend
+### Client
 
-To run the frontend React app, navigate to the `client` folder and run:
-
-```sh
-npm run dev
+Create a `.env` file in the `client` directory with the following content:
+```
+VITE_API_URL=http://localhost:5000/gemini
 ```
 
-The frontend development server will start, and you can access the app at [http://localhost:3000](http://localhost:3000).
+### Server
 
-### Backend
+Create a `.env` file in the `server` directory with the following content:
+```
+API_KEY=your_gemini_api_key
+```
 
-To run the backend server using Express.js, navigate to the `server` folder and run:
+## Usage
 
-```sh
+### Running the Server
+
+Navigate to the `server` directory and start the server:
+```bash
 npm start
 ```
 
-The backend server will start, and you can access it at [http://localhost:8000](http://localhost:8000).
+The server will start on `http://localhost:5000`.
 
-## Frontend-Backend Integration
+### Running the Client
 
-The frontend communicates with the backend server to get responses from the Generative AI model. When a user asks a question, the frontend sends a POST request to the backend with the chat history and the user's question. The backend then processes the request using the Generative AI model and returns the response, which is displayed in the chat history.
+Navigate to the `client` directory and start the client:
+```bash
+npm run dev
+```
+
+The client will start on `http://localhost:5173` (default Vite port).
+
+## Technologies Used
+
+- **Client:** React, TypeScript, Vite
+- **Server:** Express, TypeScript, Google Generative AI API, dotenv, morgan, helmet, cors
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a Pull Request.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+![Screenshot](./screenshot.jpeg)
